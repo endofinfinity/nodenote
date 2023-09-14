@@ -1,3 +1,4 @@
+-- 用户信息表
 create table `ev_users` (
     `id` int not null auto_increment,
     `username` varchar(255) not null,
