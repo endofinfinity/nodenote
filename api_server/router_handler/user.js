@@ -62,7 +62,7 @@ exports.login = (req, res) => {
 
     // TODO：在服务器端生成 Token 的字符串
     const user = { ...results[0], password: '', user_pic: '' }
-    // 对用户的信息进行加密，生成 Token 字符串：用户，token，有效期
+    // 对用户的信息进行加密，生成 jwt-Token 字符串（3个参数：用户信息，加密和解密 Token 的秘钥，有效期）
     const tokenStr = jwt.sign(user, config.jwtSecretKey, { expiresIn: config.expiresIn })
     // 调用 res.send() 将 Token 响应给客户端
     res.send({
