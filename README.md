@@ -6,4 +6,4 @@ node
 
 [b站node视频链接](https://www.bilibili.com/video/BV1a34y167AZ/?vd_source=c1eee3a069258e9ee868a50d07d8ba36)
 
-[csdn笔记链接]()
+[csdn笔记链接](https://blog.csdn.net/weixin_44403520/article/details/132695190)
