@@ -29,7 +29,7 @@ exports.regUser = (req, res) => {
       // return res.send({ status: 1, message: '用户名被占用，请更换其他用户名！' })
       return res.cc('用户名被占用，请更换其他用户名！')
     }
-    // 调用 bcrypt.hashSync() 对密码进行加密
+    // 调用 bcrypt.hashSync() 对密码进行加密。第一个参数为加密的数据（data）必须为String类型的值，第二个参数为salt 加密程度，类型必须是Number 。 这里salt的值可以 理解为加密的程度，salt值越大，越消耗时间，加密的程度也会越高
     userinfo.password = bcrypt.hashSync(userinfo.password, 10)
     // 定义插入新用户的 SQL 语句
     const sql = 'insert into ev_users set ?'
