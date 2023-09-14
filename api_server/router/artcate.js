@@ -14,16 +14,20 @@ const { add_cate_schema } = require('../schema/artcate')
 const { delete_cate_schema } = require('../schema/artcate')
 // 导入根据 Id 获取分类的验证规则对象
 const { get_cate_schema } = require('../schema/artcate')
+// 导入更新文章分类的验证规则对象
+const { update_cate_schema } = require('../schema/artcate')
 
 
 // 获取文章分类的列表数据
 router.get('/cates', artcate_handler.getArticleCates)
 // 新增文章分类的路由
 router.post('/addcates', expressJoi(add_cate_schema), artcate_handler.addArticleCates)
-// 根据id删除文章分类的路由
+// 根据id 删除文章分类的路由
 router.get('/deletecate/:id', expressJoi(delete_cate_schema), artcate_handler.deleteCateById)
-// 根据id查找文章分类的路由
-router.get('/cates/:id', expressJoi(get_cate_schema),artcate_handler.getArticleById)
+// 根据id 查找文章分类的路由
+router.get('/cates/:id', expressJoi(get_cate_schema), artcate_handler.getArticleById)
+// 根据id 更新文章分类的路由
+router.post('/updatecate', expressJoi(update_cate_schema), artcate_handler.updateCateById)
 
 
 // 向外共享路由对象
