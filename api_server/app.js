@@ -33,13 +33,22 @@ app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] })
 // 1 导入并注册 用户注册登录路由模块
 const userRouter = require('./router/user.js')
 app.use('/api', userRouter)
+
 // 2 导入并注册 用户信息路由模块
 const userinfoRouter = require('./router/userinfo.js')
 app.use('/my',userinfoRouter)
+
 // 3 导入并注册 文章分类管理
 const artCateRouter = require('./router/artcate')
-// 为文章分类的路由挂载统一的访问前缀 /my/article
+// 3 为文章分类的路由挂载统一的访问前缀 /my/article
 app.use('/my/article', artCateRouter)
+
+// 4 导入并使用文章路由模块
+const articleRouter = require('./router/article')
+// 4 为文章的路由挂载统一的访问前缀 /my/article
+app.use('/my/article', articleRouter)
+// 4 托管静态资源文件
+app.use('/uploads', express.static('./uploads'))
 
 
 // 定义错误级别的中间件
