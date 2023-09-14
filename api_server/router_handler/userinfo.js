@@ -31,7 +31,7 @@ exports.getUserInfo = (req, res) => {
 
 }
 
-// 2.1 个人信息模块 更新用户基本信息的处理函数
+// 2.1 个人信息模块 用户基本信息处理函数
 exports.updateUserInfo = (req, res) => {
     const sql = `update ev_users set ? where id=?`
     db.query(sql, [req.body, req.body.id], (err, results) => {
@@ -64,7 +64,7 @@ exports.updatePassword = (req, res) => {
         // compareSync() 函数的返回值为布尔值，true 表示密码正确，false 表示密码错误
         if (!compareResult) return res.cc('原密码错误！')
 
-        // 定义更新用户密码的 SQL 语句
+        // 定义更新用户密码的 SQL 语句,内外函数的变量作用域不同，不冲突
         const sql = `update ev_users set password=? where id=?`
 
         // 对新密码进行 bcrypt 加密处理。第一个参数为加密的数据（data）必须为String类型的值，第二个参数为salt 加密程度，类型必须是Number 。 这里salt的值可以 理解为加密的程度，salt值越大，越消耗时间，加密的程度也会越高
@@ -81,5 +81,21 @@ exports.updatePassword = (req, res) => {
             // 更新密码成功
             res.cc('更新密码成功！', 0)
         })
+    })
+}
+
+// 2.3 个人信息模块 更换头像处理函数
+exports.updateAvatar = (req, res) => {
+    // res.send('ok')
+    const sql = 'update ev_users set user_pic=? where id=?'
+    db.query(sql, [req.body.avatar, req.user.id], (err, results) => {
+        // 执行 SQL 语句失败
+        if (err) return res.cc(err)
+
+        // 执行 SQL 语句成功，但是影响行数不等于 1
+        if (results.affectedRows !== 1) return res.cc('更新头像失败！')
+
+        // 更新用户头像成功
+        return res.cc('更新头像成功！', 0)
     })
 }

@@ -11,3 +11,18 @@ create table `ev_users` (
     unique index `username_unique` (`username` asc) visible
 
 ) comment = '用户信息表';
+
+-- 文章分类数据表
+create table `ev_article_cate` (
+    `id` int not null auto_increment,
+    `name` varchar(255) not null,
+    `alias` varchar(255) not null,
+    `is_delete` tinyint(1) not null default 0 comment '0 没有被删除,1 被删除',
+    primary key(`id`),
+    unique index `id_unique` (`id` asc) visible,
+    unique index `name_unique` (`name` asc) visible,
+    unique index `alias_unique` (`alias` asc) visible
+
+) comment = '文章分类数据表';
+-- 插入数据
+insert into ev_article_cate (name,alias) values ('科技','KeJi'),('历史','LiShi');
